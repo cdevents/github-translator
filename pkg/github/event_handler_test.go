@@ -13,6 +13,7 @@ func TestHandleTranslateProjectCreatedEvent(t *testing.T) {
 	}
 	headers := http.Header{}
 	headers.Set("X-Origin-Url", "http://github.cdevent.translate")
+	headers.Set("X-GitHub-Event", "repository")
 
 	cdEvent, err := HandleTranslateGithubEvent(string(event), headers)
 	if err != nil {

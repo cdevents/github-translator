@@ -1,6 +1,9 @@
 package github
 
-// Github event types
+/**
+* Github-webhook-Event types
+**/
+
 type CommonFields struct {
 	Type      string  `json:"type"`
 	CreatedAt float64 `json:"createdAt"`
@@ -10,6 +13,7 @@ type CommonFields struct {
 /*
 * push events for creation, updates and deletes
 **/
+
 type PushRepoCreated struct {
 	Repository string `json:"repository"`
 	HeadName   string `json:"headName"`

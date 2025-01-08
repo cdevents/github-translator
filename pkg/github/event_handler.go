@@ -22,6 +22,9 @@ func HandleTranslateGithubEvent(event string, header http.Header) (string, error
 	if header.Get("X-Origin-Url") != "" {
 		repoURL = header.Get("X-Origin-Url")
 	}
+	if header.Get("X-GitHub-Event") != "" {
+		event = header.Get("X-GitHub-Event")
+	}
 	githubEvent := NewGithubEvent(event, repoURL)
 	cdEvent, err := githubEvent.TranslateIntoCDEvent()
 	if err != nil {
@@ -44,7 +47,7 @@ func (pEvent *GithubEvent) TranslateIntoCDEvent() (string, error) {
 	Log().Info("handling translating to CDEvent from Github Event type: %s\n", eventType)
 
 	switch eventType {
-	case ProjectCreatedEventType:
+	case RepositoryCreatedEventType:
 		cdEvent, err = pEvent.HandleRepoCreatedEvent()
 		if err != nil {
 			return "", err

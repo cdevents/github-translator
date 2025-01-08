@@ -1,0 +1,52 @@
+{
+  "action": "created",
+  "repository": {
+    "id": 12345678,
+    "node_id": "MDEwOlJlcG9zaXRvcnkxMjM0NTY3OA==",
+    "name": "new-repository",
+    "full_name": "username/new-repository",
+    "private": false,
+    "owner": {
+      "login": "username",
+      "id": 98765,
+      "node_id": "MDQ6VXNlcjk4Nzg0",
+      "avatar_url": "https://avatars.githubusercontent.com/u/98765?v=4",
+      "url": "https://api.github.com/users/username",
+      "html_url": "https://github.com/username",
+      "type": "User",
+      "site_admin": false
+    },
+    "html_url": "https://github.com/username/new-repository",
+    "description": "This is a new repository created for demonstration purposes.",
+    "created_at": "2025-01-05T12:00:00Z",
+    "updated_at": "2025-01-05T12:00:00Z",
+    "pushed_at": "2025-01-05T12:00:00Z",
+    "size": 0,
+    "stargazers_count": 0,
+    "watchers_count": 0,
+    "language": null,
+    "has_issues": true,
+    "has_projects": true,
+    "has_downloads": true,
+    "has_wiki": true,
+    "has_pages": false,
+    "forks_count": 0,
+    "mirror_url": null,
+    "archived": false,
+    "disabled": false,
+    "open_issues_count": 0,
+    "license": null,
+    "allow_forking": true,
+    "is_template": false,
+    "topics": []
+  },
+  "sender": {
+    "login": "username",
+    "id": 98765,
+    "avatar_url": "https://avatars.githubusercontent.com/u/98765?v=4",
+    "url": "https://api.github.com/users/username",
+    "html_url": "https://github.com/username",
+    "type": "User",
+    "site_admin": false
+  }
+}
