@@ -10,6 +10,28 @@ type CommonFields struct {
 	Url       string  `json:"repoURL,omitempty"`
 }
 
+type Commiter struct {
+	Name     string `json:"name"`
+	Email    string `json:"email"`
+	Username string `json:"username"`
+}
+
+type Change struct {
+	Repository    string   `json:"repository"`
+	Branch        string   `json:"branch"`
+	Id            string   `json:"id"`
+	Number        int      `json:"number"`
+	Subject       string   `json:"subject"`
+	Owner         Commiter `json:"commiter"`
+	CommitMessage string   `json:"commitMessage"`
+	CreatedOn     float64  `json:"createdOn"`
+	Status        string   `json:"status"`
+	Ref           string   `json:"ref"`
+	Ref_type      string   `json:"ref_type"`
+	Before        string   `json:"before"`
+	After         string   `json:"after"`
+}
+
 /*
 * push events for creation, updates and deletes
 **/
@@ -21,7 +43,8 @@ type PushRepoCreated struct {
 }
 
 type PushChangeUpdated struct {
-}
-
-type PushBranchDeleted struct {
+	OldHead string `json:"oldHead"`
+	NewHead string `json:"newHead"`
+	CommonFields
+	Change
 }

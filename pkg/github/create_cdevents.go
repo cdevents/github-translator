@@ -24,3 +24,23 @@ func (repoCreated *PushRepoCreated) RepositoryCreatedToCDEvent() (string, error)
 
 	return cdEventStr, nil
 }
+
+func (changeUpdated *PushChangeUpdated) RepoUpdatedToCDEvent() (string, error) {
+	Log().Info("Creating CDEvent RepoUpdatedToCDEvent")
+	cdEvent, err := sdk.NewBranchCreatedEventV0_2_0(SpecVersion)
+	if err != nil {
+		Log().Error("Error creating CDEvent RepoUpdatedToCDEvent %s\n", err)
+	}
+
+	cdEvent.SetSource(changeUpdated.CommonFields.Url)
+	cdEvent.SetSubjectRepository(&sdk.Reference{Id: changeUpdated.NewHead})
+	cdEvent.SetSubjectId(changeUpdated.NewHead)
+	cdEvent.SetSubjectSource(changeUpdated.Repository)
+	cdEventStr, err := sdk.AsJsonString(cdEvent)
+	if err != nil {
+		Log().Error("Error creating RepoUpdatedToCDEvent CDEvent as Json string %s\n", err)
+		return "", err
+	}
+
+	return cdEventStr, nil
+}

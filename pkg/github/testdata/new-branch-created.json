@@ -1,0 +1,9 @@
+{
+  "repository": "TestRepo3",
+  "newHead": "refs/heads/dev",
+  "oldHead": "refs/heads/main",
+  "type": "branch",
+  "createdAt": 1700131789,
+  "before": "0000000000000000000000000000000000000000",
+  "after": "abc1234567890def"
+}

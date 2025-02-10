@@ -4,7 +4,7 @@ GOBUILD=$(GOCMD) build
 GOFMT=$(GOCMD) fmt
 GOVET=$(GOCMD) vet
 GOTEST=$(GOCMD) test
-BINARY_NAME=gerrit-translator-cdevents
+BINARY_NAME=github-translator-cdevents
 PKG_DIR=./pkg/
 
 all: fmt vet test build
