@@ -57,6 +57,11 @@ func (pEvent *GithubEvent) TranslateIntoCDEvent() (string, error) {
 		if err != nil {
 			return "", err
 		}
+	case BranchDeletedEventType:
+		cdEvent, err = pEvent.HandleBranchDeletedEvent()
+		if err != nil {
+			return "", err
+		}
 	default:
 		Log().Info("Not handling CDEvent translation for Github event type: %s\n", eventMap["type"])
 		return "", fmt.Errorf("Github event type %s, not supported for translation", eventType)
