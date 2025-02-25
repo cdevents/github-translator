@@ -3,8 +3,7 @@ package github
 const (
 	RepositoryCreatedEventType = "repository"
 	ZeroedSha                  = "0000000000000000000000000000000000000000"
-	PushCreated                = "created"
-	PushDeleted                = "deleted"
-	PushModified               = "modified"
-	Push                       = "push"
+	PushCreated                = "create"
+	PushDeleted                = "delete"
+	PushModified               = "push"
 )

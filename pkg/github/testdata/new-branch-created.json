@@ -2,7 +2,7 @@
   "repository": "TestRepo3",
   "ref": "refs/heads/dev",
   "base_ref": "refs/heads/main",
-  "type": "created",
+  "type": "create",
   "createdAt": 1700131789,
   "commitMessage": "sample commit",
   "before": "0000000000000000000000000000000000000000",
