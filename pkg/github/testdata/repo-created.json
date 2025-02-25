@@ -2,6 +2,6 @@
   "repository": "TestRepo3",
   "headName": "refs/heads/master",
   "type": "repository",
-  "verb": "created",
+  "created": "true",
   "createdAt": 1700131789
 }

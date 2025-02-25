@@ -33,8 +33,8 @@ func (changeUpdated *PushChangeUpdated) RepoBranchUpdatedToCDEvent() (string, er
 	}
 
 	cdEvent.SetSource(changeUpdated.CommonFields.Url)
-	cdEvent.SetSubjectRepository(&sdk.Reference{Id: changeUpdated.NewHead})
-	cdEvent.SetSubjectId(changeUpdated.NewHead)
+	cdEvent.SetSubjectRepository(&sdk.Reference{Id: changeUpdated.Ref})
+	cdEvent.SetSubjectId(changeUpdated.Ref)
 	cdEvent.SetSubjectSource(changeUpdated.Repository)
 	cdEventStr, err := sdk.AsJsonString(cdEvent)
 	if err != nil {
@@ -53,8 +53,8 @@ func (changeUpdated *PushChangeUpdated) RepoBranchDeletedToCDEvent() (string, er
 	}
 
 	cdEvent.SetSource(changeUpdated.CommonFields.Url)
-	cdEvent.SetSubjectRepository(&sdk.Reference{Id: changeUpdated.OldHead})
-	cdEvent.SetSubjectId(changeUpdated.OldHead)
+	cdEvent.SetSubjectRepository(&sdk.Reference{Id: changeUpdated.Ref})
+	cdEvent.SetSubjectId(changeUpdated.Ref)
 	cdEvent.SetSubjectSource(changeUpdated.Repository)
 	cdEventStr, err := sdk.AsJsonString(cdEvent)
 	if err != nil {

@@ -9,7 +9,7 @@ func (pEvent *GithubEvent) HandleRepoCreatedEvent() (string, error) {
 		Log().Error("Error occurred while Unmarshal GithubEvent into RepoCreated struct", err)
 		return "", err
 	}
-	Log().Info("RepoCreated Gith received : ", RepoCreated.Repository, RepoCreated.HeadName, RepoCreated.CommonFields.Type)
+	Log().Info("RepoCreated Git received : ", RepoCreated.Repository, RepoCreated.HeadName, RepoCreated.CommonFields.Type)
 	RepoCreated.Url = pEvent.repoUrl
 	cdEvent, err := RepoCreated.RepositoryCreatedToCDEvent()
 	if err != nil {
@@ -26,7 +26,7 @@ func (pEvent *GithubEvent) HandleBranchCreatedEvent() (string, error) {
 		Log().Error("Error occurred while Unmarshal GithubEvent into Branch-created struct", err)
 		return "", err
 	}
-	Log().Info("BranchCreated Git received : ", changeUpdated.Repository, changeUpdated.OldHead, changeUpdated.CommonFields.Type)
+	Log().Info("BranchCreated Git received : ", changeUpdated.Repository, changeUpdated.Ref, changeUpdated.CommonFields.Type)
 	changeUpdated.Url = pEvent.repoUrl
 	cdEvent, err := changeUpdated.RepoBranchUpdatedToCDEvent()
 	if err != nil {
@@ -43,7 +43,7 @@ func (pEvent *GithubEvent) HandleBranchDeletedEvent() (string, error) {
 		Log().Error("Error occurred while Unmarshal GithubEvent into Branch-created struct", err)
 		return "", err
 	}
-	Log().Info("BranchCreated Git received : ", changeUpdated.Repository, changeUpdated.OldHead, changeUpdated.CommonFields.Type)
+	Log().Info("BranchCreated Git received : ", changeUpdated.Repository, changeUpdated.Ref, changeUpdated.CommonFields.Type)
 	changeUpdated.Url = pEvent.repoUrl
 	cdEvent, err := changeUpdated.RepoBranchDeletedToCDEvent()
 	if err != nil {

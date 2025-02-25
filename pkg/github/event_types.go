@@ -8,8 +8,15 @@ type CommonFields struct {
 	Type      string  `json:"type"`
 	CreatedAt float64 `json:"createdAt"`
 	Url       string  `json:"repoURL,omitempty"`
+	Verb      Verb    `json:"verb,omitempty"`
 }
 
+type Verb struct {
+	Created  bool `json:"created"`
+	Modified bool `json:"modified"`
+	Deleted  bool `json:"deleted"`
+	Forced   bool `json:"forced"`
+}
 type Commiter struct {
 	Name     string `json:"name"`
 	Email    string `json:"email"`
@@ -27,7 +34,7 @@ type Change struct {
 	CreatedOn     float64  `json:"createdOn"`
 	Status        string   `json:"status"`
 	Ref           string   `json:"ref"`
-	Ref_type      string   `json:"ref_type"`
+	BaseRef       string   `json:"base_ref"`
 	Before        string   `json:"before"`
 	After         string   `json:"after"`
 }
@@ -43,8 +50,7 @@ type PushRepoCreated struct {
 }
 
 type PushChangeUpdated struct {
-	OldHead string `json:"oldHead"`
-	NewHead string `json:"newHead"`
 	CommonFields
 	Change
+	Commiter
 }
