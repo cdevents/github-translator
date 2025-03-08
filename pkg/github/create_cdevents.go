@@ -64,3 +64,23 @@ func (changeUpdated *PushChangeUpdated) RepoBranchDeletedToCDEvent() (string, er
 
 	return cdEventStr, nil
 }
+
+func (changeUpdated *PushChangeUpdated) RepoBranchModifiedToCDEvent() (string, error) {
+	Log().Info("Creating CDEvent RepoBranchModifiedToCDEvent")
+	cdEvent, err := sdk.NewChangeCreatedEventV0_1_2(SpecVersion)
+	if err != nil {
+		Log().Error("Error creating CDEvent RepoBranchModifiedToCDEvent %s\n", err)
+	}
+
+	cdEvent.SetSource(changeUpdated.CommonFields.Url)
+	cdEvent.SetSubjectRepository(&sdk.Reference{Id: changeUpdated.Ref})
+	cdEvent.SetSubjectId(changeUpdated.Ref)
+	cdEvent.SetSubjectSource(changeUpdated.Repository)
+	cdEventStr, err := sdk.AsJsonString(cdEvent)
+	if err != nil {
+		Log().Error("Error creating RepoBranchDeletedToCDEvent CDEvent as Json string %s\n", err)
+		return "", err
+	}
+
+	return cdEventStr, nil
+}

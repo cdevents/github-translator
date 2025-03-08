@@ -50,7 +50,7 @@ func (pEvent *GithubEvent) TranslateIntoCDEvent() (string, error) {
 	after := eventMap["after"]
 	created := eventMap["created"]
 	deleted := eventMap["deleted"]
-	//	modified := eventMap["modified"]
+	modified := eventMap["modified"]
 
 	Log().Info("handling translating to CDEvent from Github Event type: %s ", eventType)
 
@@ -80,7 +80,15 @@ func (pEvent *GithubEvent) TranslateIntoCDEvent() (string, error) {
 				}
 			}
 		}
-
+	case PushModified:
+		if oldBranch == nil && newBranch != nil {
+			if modified == true {
+				cdEvent, err = pEvent.HandleBranchModifiedEvent()
+				if err != nil {
+					return "", err
+				}
+			}
+		}
 	default:
 		Log().Info("Not handling CDEvent translation for Github event type: %s\n", eventMap["type"])
 		return "", fmt.Errorf("Github event type %s, not supported for translation", eventType)
