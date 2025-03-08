@@ -1,0 +1,16 @@
+{
+  "repository": "TestRepo3",
+  "ref": "refs/heads/featured-branch",
+  "type": "delete",
+  "createdAt": 1700131789,
+  "before": "4b0dbf3d5b22d93906ef38a2d7afdc77f6b575da",
+  "after": "0000000000000000000000000000000000000000",
+  "created": false,
+  "deleted": true,
+  "forced": false,
+  "committer": {
+    "name": "GitHub",
+    "email": "noreply@github.com",
+    "username": "web-flow"
+  }
+}

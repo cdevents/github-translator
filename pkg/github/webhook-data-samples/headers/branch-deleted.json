@@ -1,0 +1,28 @@
+{
+  "headers": {
+    "host": "localhost:3000",
+    "user-agent": "GitHub-Hookshot/56ca054",
+    "content-length": "9015",
+    "accept": "application/json, text/plain, */*",
+    "content-type": "application/x-www-form-urlencoded",
+    "idempotency-key": "evt_XQ0HQ1nibLNGuZ2k6Q",
+    "x-github-delivery": "0e2503a0-f088-11ef-96d9-cd56b17c0b6e",
+    "x-github-event": "delete",
+    "x-github-hook-id": "531374501",
+    "x-github-hook-installation-target-id": "841617208",
+    "x-github-hook-installation-target-type": "repository",
+    "x-hookdeck-attempt-count": "1",
+    "x-hookdeck-connection-name": "github_to_cli-github",
+    "x-hookdeck-destination-name": "cli-github",
+    "x-hookdeck-event-url": "https://dashboard.hookdeck.com/cli/events/evt_XQ0HQ1nibLNGuZ2k6Q",
+    "x-hookdeck-eventid": "evt_XQ0HQ1nibLNGuZ2k6Q",
+    "x-hookdeck-original-ip": "140.82.115.10",
+    "x-hookdeck-requestid": "req_gzQVH8ci3pyFio8IHUVj",
+    "x-hookdeck-signature": "RxBjO19I0TgiVtp+dxCYOvmVhpX+81ogy5tNTjAIECs=",
+    "x-hookdeck-source-name": "github",
+    "x-hookdeck-verified": "false",
+    "x-hub-signature": "sha1=05b75ab1bc25a616749bd51af58eb51c3388b822",
+    "x-hub-signature-256": "sha256=7ac7790f44ee9a611612b9c8c38ed4eb3558c16ac72d950bd40b71908df07859",
+    "accept-encoding": "gzip"
+  }
+}

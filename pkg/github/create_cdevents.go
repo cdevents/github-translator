@@ -25,20 +25,60 @@ func (repoCreated *PushRepoCreated) RepositoryCreatedToCDEvent() (string, error)
 	return cdEventStr, nil
 }
 
-func (changeUpdated *PushChangeUpdated) RepoUpdatedToCDEvent() (string, error) {
-	Log().Info("Creating CDEvent RepoUpdatedToCDEvent")
+func (changeUpdated *PushChangeUpdated) RepoBranchUpdatedToCDEvent() (string, error) {
+	Log().Info("Creating CDEvent RepoBranchUpdatedToCDEvent")
 	cdEvent, err := sdk.NewBranchCreatedEventV0_2_0(SpecVersion)
 	if err != nil {
-		Log().Error("Error creating CDEvent RepoUpdatedToCDEvent %s\n", err)
+		Log().Error("Error creating CDEvent RepoBranchUpdatedToCDEvent %s\n", err)
 	}
 
 	cdEvent.SetSource(changeUpdated.CommonFields.Url)
-	cdEvent.SetSubjectRepository(&sdk.Reference{Id: changeUpdated.NewHead})
-	cdEvent.SetSubjectId(changeUpdated.NewHead)
+	cdEvent.SetSubjectRepository(&sdk.Reference{Id: changeUpdated.Ref})
+	cdEvent.SetSubjectId(changeUpdated.Ref)
 	cdEvent.SetSubjectSource(changeUpdated.Repository)
 	cdEventStr, err := sdk.AsJsonString(cdEvent)
 	if err != nil {
-		Log().Error("Error creating RepoUpdatedToCDEvent CDEvent as Json string %s\n", err)
+		Log().Error("Error creating RepoBranchUpdatedToCDEvent CDEvent as Json string %s\n", err)
+		return "", err
+	}
+
+	return cdEventStr, nil
+}
+
+func (changeUpdated *PushChangeUpdated) RepoBranchDeletedToCDEvent() (string, error) {
+	Log().Info("Creating CDEvent RepoBranchDeletedToCDEvent")
+	cdEvent, err := sdk.NewBranchDeletedEventV0_2_0(SpecVersion)
+	if err != nil {
+		Log().Error("Error creating CDEvent RepoBranchDeletedToCDEvent %s\n", err)
+	}
+
+	cdEvent.SetSource(changeUpdated.CommonFields.Url)
+	cdEvent.SetSubjectRepository(&sdk.Reference{Id: changeUpdated.Ref})
+	cdEvent.SetSubjectId(changeUpdated.Ref)
+	cdEvent.SetSubjectSource(changeUpdated.Repository)
+	cdEventStr, err := sdk.AsJsonString(cdEvent)
+	if err != nil {
+		Log().Error("Error creating RepoBranchDeletedToCDEvent CDEvent as Json string %s\n", err)
+		return "", err
+	}
+
+	return cdEventStr, nil
+}
+
+func (changeUpdated *PushChangeUpdated) RepoBranchModifiedToCDEvent() (string, error) {
+	Log().Info("Creating CDEvent RepoBranchModifiedToCDEvent")
+	cdEvent, err := sdk.NewChangeCreatedEventV0_1_2(SpecVersion)
+	if err != nil {
+		Log().Error("Error creating CDEvent RepoBranchModifiedToCDEvent %s\n", err)
+	}
+
+	cdEvent.SetSource(changeUpdated.CommonFields.Url)
+	cdEvent.SetSubjectRepository(&sdk.Reference{Id: changeUpdated.Ref})
+	cdEvent.SetSubjectId(changeUpdated.Ref)
+	cdEvent.SetSubjectSource(changeUpdated.Repository)
+	cdEventStr, err := sdk.AsJsonString(cdEvent)
+	if err != nil {
+		Log().Error("Error creating RepoBranchDeletedToCDEvent CDEvent as Json string %s\n", err)
 		return "", err
 	}
 

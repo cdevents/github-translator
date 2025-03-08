@@ -44,18 +44,50 @@ func (pEvent *GithubEvent) TranslateIntoCDEvent() (string, error) {
 		return "", err
 	}
 	eventType := eventMap["type"]
-	Log().Info("handling translating to CDEvent from Github Event type: %s\n", eventType)
+	oldBranch := eventMap["base_ref"]
+	newBranch := eventMap["ref"]
+	before := eventMap["before"]
+	after := eventMap["after"]
+	created := eventMap["created"]
+	deleted := eventMap["deleted"]
+	modified := eventMap["modified"]
+
+	Log().Info("handling translating to CDEvent from Github Event type: %s ", eventType)
 
 	switch eventType {
-	case RepositoryCreatedEventType:
-		cdEvent, err = pEvent.HandleRepoCreatedEvent()
-		if err != nil {
-			return "", err
+	case PushCreated:
+		if before == ZeroedSha && created == true {
+			if oldBranch != nil && newBranch != nil {
+				cdEvent, err = pEvent.HandleBranchCreatedEvent()
+				if err != nil {
+					return "", err
+				}
+			}
 		}
-	case BranchCreatedEventType:
-		cdEvent, err = pEvent.HandleBranchCreatedEvent()
-		if err != nil {
-			return "", err
+	case RepositoryCreatedEventType:
+		if created != true {
+			cdEvent, err = pEvent.HandleRepoCreatedEvent()
+			if err != nil {
+				return "", err
+			}
+		}
+	case PushDeleted:
+		if oldBranch == nil && newBranch != nil {
+			if after == ZeroedSha && deleted == true {
+				cdEvent, err = pEvent.HandleBranchDeletedEvent()
+				if err != nil {
+					return "", err
+				}
+			}
+		}
+	case PushModified:
+		if oldBranch == nil && newBranch != nil {
+			if modified == true {
+				cdEvent, err = pEvent.HandleBranchModifiedEvent()
+				if err != nil {
+					return "", err
+				}
+			}
 		}
 	default:
 		Log().Info("Not handling CDEvent translation for Github event type: %s\n", eventMap["type"])
